@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: pip install flake8
-      - run: flake8 . --ignore=E302,E305,E501,F401,E402 --exclude=.devcontainer,.github
+      - run: flake8 webapp/ --ignore=E302,E305,E501
   test:
     needs: lint
     runs-on: ubuntu-latest
@@ -38,7 +38,8 @@ jobs:
         with:
           context: ./webapp
           push: true
-          tags: ghcr.io/${{ github.repository }}/webapp:latest
+          # Force lowercase name here:
+          tags: ghcr.io/kamal-abbasli/github-cloud-lab/webapp:latest
   deploy-staging:
     needs: build-and-push
     runs-on: ubuntu-latest
